@@ -8,7 +8,7 @@ Features
 --------
 
 -  Generate short (22 character), URL-safe base64-encoded UUIDs.
--  Upload media files to short, unique UUID filenames.
+-  Upload media files to short UUID filenames.
 
 
 Installation
@@ -35,7 +35,7 @@ Generate a short, URL-safe UUID as follows:
 Generating upload paths
 -----------------------
 
-To upload media files to short, unique UUID filesname, just set `upload_to` to `uuid_upload_path.upload_to`.
+To upload media files to short UUID filenames, just set `upload_to` to `uuid_upload_path.upload_to`.
 
 ::
 
@@ -51,11 +51,11 @@ To upload media files to short, unique UUID filesname, just set `upload_to` to `
 Why use UUIDs as upload paths?
 ------------------------------
 
-Django tries to ensure that all your uploaded files are given unique names on the filesystem. It does this by checking if a file with the same name exists before saving a new one, and adding a suffix to the new file would otherwise conflict with the existing one.
+Django tries to ensure that all your uploaded files are given unique names on the filesystem. It does this by checking if a file with the same name exists before saving a new one, and adding a suffix if the new file would otherwise conflict with the existing one.
 
-If you're saving files to disk using the built-in `django.core.files.storage.FileSystemStorage`, this isn't much of a problem. However, if you're using a cloud file storage, such as `storages.backends.s3boto.S3BotoStorage`, this uniqueness check can have a noticeable effect on the performance of file uploads. Worse, the default configuration of `S3BotoStorage` is to overwrite existing files with the same name when uploading a new file!
+If you're saving files to disk using the built-in ``django.core.files.storage.FileSystemStorage``, this isn't much of a problem. However, if you're using a cloud file storage, such as ``storages.backends.s3boto.S3BotoStorage``, this uniqueness check can have a noticeable effect on the performance of file uploads. Worse, the default configuration of `S3BotoStorage` is to overwrite existing files with the same name when uploading a new file!
 
-By generating a unique filename for each uploaded file, django-uuid-upload-path removed the need for a costly uniqueness check, and avoids accidentally overriding existing files on remote cloud storages.
+By generating a unique filename for each uploaded file, django-uuid-upload-path removes the need for a costly uniqueness check, and avoids accidentally overwriting existing files on remote cloud storages.
 
 
 Support and announcements
