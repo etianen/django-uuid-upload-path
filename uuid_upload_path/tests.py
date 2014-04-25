@@ -1,12 +1,25 @@
 from __future__ import absolute_import, unicode_literals
 
+import re
 from unittest import TestCase
 
 from uuid_upload_path.uuid import uuid
 from uuid_upload_path.storage import upload_to_factory, upload_to
 
 
-class UuidTest(TestCase):
+class TestCaseBase(TestCase):
+
+    # HACK: Backport for Python 2.6.
+    def assertRegexpMatches(self, value, regexp):
+        self.assertTrue(re.match(regexp, value))
+
+    # HACK: Backport for Python 2.6.
+    def assertNotIn(self, value, container):
+        self.assertFalse(value in container)
+
+
+
+class UuidTest(TestCaseBase):
 
     # It's hard to test random data, but more iterations makes the tests
     # more robust.
@@ -30,7 +43,7 @@ class TestModel(object):
         app_label = "test"
 
 
-class StorageTest(TestCase):
+class StorageTest(TestCaseBase):
 
     def testUploadToFactory(self):
         self.assertRegexpMatches(
