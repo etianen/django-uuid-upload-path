@@ -24,11 +24,12 @@ Generating short UUIDs
 
 Generate a short, URL-safe UUID as follows:
 
-``` python
-from uuid_upload_path import uuid
+::
 
-uuid()  // -> "hCdLEjlQQJW25-sXB3T_Gw"
-```
+    from uuid_upload_path import uuid
+
+    uuid()  // -> "hCdLEjlQQJW25-sXB3T_Gw"
+
 
 
 Generating upload paths
@@ -36,15 +37,15 @@ Generating upload paths
 
 To upload media files to short, unique UUID filesname, just set `upload_to` to `uuid_upload_path.upload_to`.
 
-``` python
-from uuid_upload_path import upload_to
+::
 
-class YourModel(models.Model):
+    from uuid_upload_path import upload_to
 
-    file = models.FileField(
-        upload_to = upload_to,
-    )
-```
+    class YourModel(models.Model):
+
+        file = models.FileField(
+            upload_to = upload_to,
+        )
 
 
 Why use UUIDs as upload paths?
